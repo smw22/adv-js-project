@@ -1,9 +1,12 @@
-<script setup lang="ts">
+<script setup lang="js">
 import { formVisibility } from '../modules/formVisibility';
 const { showEventForm } = formVisibility(); 
 
 import { useEvents } from '../modules/useEvents';
 const { events, newEventTitle, newEventTime, editingId, enterEditMode, deleteEvent, updateEvent} = useEvents();
+
+import { useUsers } from '../modules/useUsers'
+const { user } = useUsers();
 
 // import { useCalendar } from '../modules/useCalendar';
 // const { calendarDays, dayDate, addDate } = useCalendar();
@@ -25,8 +28,8 @@ const { events, newEventTitle, newEventTime, editingId, enterEditMode, deleteEve
             </div>
             <div class="days">
                 <div class="row">
-                    <div id="day" class="1"><span>1</span> <span class="add-event-button" @click="showEventForm">+</span> <br>
-                        <ul>
+                    <div id="day" class="1"><span>1</span> <span v-if="user" class="add-event-button" @click="showEventForm">+</span> <br>
+                        <ul v-if="user">
                             <!-- <li v-for="event in events" :key="event.id">
                                 {{ event.title }} at {{ event.time }} 
                                 <div class="event-buttons">

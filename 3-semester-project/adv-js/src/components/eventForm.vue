@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import { formVisibility } from '../modules/formVisibility';
 const { eventFormVisible, hideEventForm } = formVisibility(); 
 

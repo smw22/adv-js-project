@@ -26,6 +26,7 @@ export function formVisibility() {
         showEventForm,
         hideEventForm,
         showLoginForm,
-        hideLoginForm
+        hideLoginForm,
+
     };
 }
