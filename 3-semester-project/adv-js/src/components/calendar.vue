@@ -9,7 +9,7 @@ import { useUsers } from '../modules/useUsers'
 const { user } = useUsers();
 
 import { getDecemberDates } from '../modules/datesOfDecember'
-const {dates} = getDecemberDates();
+const { dates } = getDecemberDates();
 
 </script>
 
@@ -33,10 +33,10 @@ const {dates} = getDecemberDates();
 
                         <div id="day"> 
                             <span>{{ new Date(date).getDate() }}</span> 
-                            <span v-if="user" class="add-event-button" @click="showEventForm">+</span> <br>
+                            <span v-if="user" class="add-event-button" @click="showEventForm(date)">+</span> <br>
 
                             <ul v-if="user" class="event-list">
-                                <li v-for="event in events" :key="event.id" class="event-element">
+                                <li v-for="event in events.filter(event => event.date === date)" :key="event.id" class="event-element">
                                     <div v-if="editingId === event.id">
                                         <input v-model="newEventTitle" placeholder="New title"/>
                                         <input v-model="newEventTime" placeholder="New time"/>

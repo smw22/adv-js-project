@@ -27,22 +27,48 @@ export const useEvents = () => {
         })
     });
     
-    //Step 4: create a function to add a new event to the list
-    const addEvent = async () => {
-        if (newEventTitle.value.trim() == '' || newEventTime.value.trim() == '') 
-        return; //checks if input is empty, then returns(stop function)
+    // //Step 4: create a function to add a new event to the list
+    // const addEvent = async (selectedDate) => {
+    //     if (newEventTitle.value.trim() == '' || newEventTime.value.trim() == '') 
+    //     return; //checks if input is empty, then returns(stop function)
     
-        await addDoc(eventsCollection, {
-        title: newEventTitle.value,
-        time: newEventTime.value,
-        date: newEventDate.value = '2024-12-' + decemberDates.dates,
-        })
+    //     await addDoc(eventsCollection, {
+    //     title: newEventTitle.value,
+    //     time: newEventTime.value,
+    //     date: selectedDate,
+    //     })
     
-        newEventTitle.value = '';
-        newEventTime.value = '';
-        newEventDate.value = '';
-        console.log('added event');
-    }
+    //     newEventTitle.value = '';
+    //     newEventTime.value = '';
+    //     newEventDate.value = '';
+    //     console.log(`added event on ${selectedDate}`);
+    // }
+
+    const addEvent = async (selectedDate) => {
+        if (newEventTitle.value.trim() === '' || newEventTime.value.trim() === '') 
+        return;
+
+        console.log("Selected date:", selectedDate);
+    
+        try {
+            // Log selectedDate and other inputs for debugging
+            console.log(`Adding event with title: ${newEventTitle.value}, time: ${newEventTime.value}, date: ${selectedDate}`);
+    
+            await addDoc(eventsCollection, {
+                title: newEventTitle.value,
+                time: newEventTime.value,
+                date: selectedDate,
+            });
+    
+            // Reset fields after successful addition
+            newEventTitle.value = '';
+            newEventTime.value = '';
+            newEventDate.value = '';
+            console.log(`Event added successfully on ${selectedDate}`);
+        } catch (error) {
+            console.error("Error adding event:", error);
+        }
+    };
     
     //Step 5: create a function to delete a event from the list
     const deleteEvent = async (id) => {
