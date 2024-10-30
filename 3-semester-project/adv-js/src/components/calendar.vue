@@ -3,13 +3,13 @@ import { formVisibility } from '../modules/formVisibility';
 const { showEventForm } = formVisibility(); 
 
 import { useEvents } from '../modules/useEvents';
-const { events, newEventTitle, newEventTime, editingId, enterEditMode, deleteEvent, updateEvent} = useEvents();
+const { events, newEventTitle, newEventTime, newEventDate, editingId, enterEditMode, deleteEvent, updateEvent} = useEvents();
 
 import { useUsers } from '../modules/useUsers'
 const { user } = useUsers();
 
 import { getDecemberDates } from '../modules/datesOfDecember'
-const decemberDates = getDecemberDates();
+const {dates} = getDecemberDates();
 
 </script>
 
@@ -29,10 +29,10 @@ const decemberDates = getDecemberDates();
             <div class="days">
 
                 <ul class="days-list">
-                    <li v-for="date in decemberDates.dates" :key="date">
+                    <li v-for="date in dates" :key="date">
 
                         <div id="day"> 
-                            <span>{{ date }}</span> 
+                            <span>{{ new Date(date).getDate() }}</span> 
                             <span v-if="user" class="add-event-button" @click="showEventForm">+</span> <br>
 
                             <ul v-if="user" class="event-list">

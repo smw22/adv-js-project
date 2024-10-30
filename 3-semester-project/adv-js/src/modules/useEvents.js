@@ -2,6 +2,9 @@ import { ref, onMounted } from 'vue';
 import { eventsCollection, eventsFirebaseCollectionRef, db } from "./firebase";
 import { onSnapshot, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
+import { getDecemberDates } from '../modules/datesOfDecember'
+const decemberDates = getDecemberDates();
+
 export const useEvents = () => {
     
     // //Step 1: new event title and time and stored in a ref
@@ -32,12 +35,12 @@ export const useEvents = () => {
         await addDoc(eventsCollection, {
         title: newEventTitle.value,
         time: newEventTime.value,
-        date: newEventDate.value
+        date: newEventDate.value = '2024-12-' + decemberDates.dates,
         })
     
         newEventTitle.value = '';
         newEventTime.value = '';
-        newEventDate.value = '' ;
+        newEventDate.value = '';
         console.log('added event');
     }
     
