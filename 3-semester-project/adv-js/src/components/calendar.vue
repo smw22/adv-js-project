@@ -8,6 +8,9 @@ const { events, newEventTitle, newEventTime, editingId, enterEditMode, deleteEve
 import { useUsers } from '../modules/useUsers'
 const { user } = useUsers();
 
+import { getDecemberDates } from '../modules/datesOfDecember'
+const { dates } = getDecemberDates();
+
 // import { useCalendar } from '../modules/useCalendar';
 // const { calendarDays, dayDate, addDate } = useCalendar();
 
@@ -27,20 +30,15 @@ const { user } = useUsers();
                 <div class="saturday">SAT</div>
             </div>
             <div class="days">
-                <div class="row">
+                <ul>
+                    <li v-for="date in dates" :key="date.value">
+                        {{ date }}
+
+                    </li>
+                </ul>
+                <!-- <div class="row">
                     <div id="day" class="1"><span>1</span> <span v-if="user" class="add-event-button" @click="showEventForm">+</span> <br>
                         <ul v-if="user">
-                            <!-- <li v-for="event in events" :key="event.id">
-                                {{ event.title }} at {{ event.time }} 
-                                <div class="event-buttons">
-                                    <button id="edit-button" @click="() => updateEvent(event.id)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
-                                    </button>
-                                    <button id="cross-button" @click="() => deleteEvent(event.id)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="#f92f60" d="M24.879 2.879A3 3 0 1 1 29.12 7.12l-8.79 8.79a.125.125 0 0 0 0 .177l8.79 8.79a3 3 0 1 1-4.242 4.243l-8.79-8.79a.125.125 0 0 0-.177 0l-8.79 8.79a3 3 0 1 1-4.243-4.242l8.79-8.79a.125.125 0 0 0 0-.177l-8.79-8.79A3 3 0 0 1 7.12 2.878l8.79 8.79a.125.125 0 0 0 .177 0z"/></svg>
-                                    </button>
-                                </div>
-                            </li> -->
                             <li v-for="event in events" :key="event.id">
                                 <div v-if="editingId === event.id">
                                     <input v-model="newEventTitle" placeholder="New title"/>
@@ -107,7 +105,7 @@ const { user } = useUsers();
                     <div class="33 off-day">2</div>
                     <div class="34 off-day">3</div>
                     <div class="35 off-day">4</div>
-                </div>
+                </div> -->
               
             </div>
         </div>

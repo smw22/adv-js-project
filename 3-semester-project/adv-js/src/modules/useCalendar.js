@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue';
-import { getDocs, addDoc } from 'firebase/firestore';
+import { getDocs } from 'firebase/firestore';
 import { calendarDaysCollection } from './firebase';
 
 export function useCalendar() {
