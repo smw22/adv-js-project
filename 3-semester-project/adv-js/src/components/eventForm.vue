@@ -9,10 +9,12 @@ const {newEventTitle, newEventTime, addEvent } = useEvents();
 
 <template>
     <div class="formContainer" v-show="eventFormVisible">
+
         <div class="cross" @click="hideEventForm">
             <span></span>
             <span></span>
         </div>
+        
         <form action="">
             
             <label for="event-title">Title</label>
@@ -25,7 +27,6 @@ const {newEventTitle, newEventTime, addEvent } = useEvents();
 
         </form>
 
-        
     </div>
 
 </template>

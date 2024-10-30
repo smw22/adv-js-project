@@ -7,6 +7,7 @@ export const useEvents = () => {
     // //Step 1: new event title and time and stored in a ref
     const newEventTitle = ref('');
     const newEventTime = ref('');
+    const newEventDate = ref('');
     const editingId = ref(null);
 
     //Step 2: list of events stored in a li in a ref
@@ -27,16 +28,16 @@ export const useEvents = () => {
     const addEvent = async () => {
         if (newEventTitle.value.trim() == '' || newEventTime.value.trim() == '') 
         return; //checks if input is empty, then returns(stop function)
-
-        console.log("test")
     
         await addDoc(eventsCollection, {
         title: newEventTitle.value,
-        time: newEventTime.value
+        time: newEventTime.value,
+        date: newEventDate.value
         })
     
         newEventTitle.value = '';
         newEventTime.value = '';
+        newEventDate.value = '' ;
         console.log('added event');
     }
     
@@ -66,16 +67,19 @@ export const useEvents = () => {
     const enterEditMode = (event) => {
         editingId.value = event.id; // Set the editing ID to the selected event
         newEventTitle.value = event.title; // Set the input value to the current title
+        newEventTime.value = event.time;
     };
 
     return {
         events, 
         newEventTitle,
         newEventTime,
+        newEventDate,
         editingId,
         enterEditMode,
         addEvent,
         deleteEvent,
-        updateEvent
+        updateEvent,
+
     }
 }
