@@ -32,20 +32,23 @@ const { dates } = getDecemberDates();
                     <li v-for="date in dates" :key="date">
 
                         <div id="day"> 
-                            <span>{{ new Date(date).getDate() }}</span> 
-                            <span v-if="user" class="add-event-button" @click="showEventForm(date)">+</span> <br>
-
+                            <span> {{ date }} </span> 
+                            
+                            <span v-if="user" class="add-event-button" @click="showEventForm(date)">+</span>
                             <ul v-if="user" class="event-list">
-                                <li v-for="event in events.filter(event => event.date === date)" :key="event.id" class="event-element">
+                                <li v-for="event in events" :key="event.id" class="event-element">
                                     <div v-if="editingId === event.id">
                                         <input v-model="newEventTitle" placeholder="New title"/>
-                                        <input v-model="newEventTime" placeholder="New time"/>
+                                        <input type="time" v-model="newEventTime" placeholder="New time"/>
+
+
                                         <button @click="updateEvent(event.id, newEventTitle, newEventTime)">Save</button>
                                         <button @click="editingId = null">Cancel</button>
+                                    
                                     </div>
                                     <div id="event-container" v-else>
                                         <div>
-                                        {{ event.title }} at {{ event.time }} 
+                                        {{ event.title }} at {{ event.time }} date: {{ event.date }}
                                         </div>
                                         <div class="event-buttons">
                                             <button @click="enterEditMode(event)">

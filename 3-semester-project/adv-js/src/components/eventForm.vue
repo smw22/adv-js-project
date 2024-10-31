@@ -1,6 +1,9 @@
 <script setup lang="js">
-import { formVisibility, selectedDate } from '../modules/formVisibility';
+import { formVisibility } from '../modules/formVisibility';
 const { eventFormVisible, hideEventForm } = formVisibility(); 
+/* 
+import { getDecemberDates } from '../modules/datesOfDecember'
+const { dates } = getDecemberDates(); */
 
 import { useEvents } from '../modules/useEvents';
 const {newEventTitle, newEventTime, addEvent } = useEvents();
@@ -21,9 +24,11 @@ const {newEventTitle, newEventTime, addEvent } = useEvents();
             <input id="event-title" type="text" placeholder="Add title" v-model="newEventTitle" />
         
             <label for="event-time">Time</label>
-            <input type="datetime" name="" id="event-time" placeholder="Add time" v-model="newEventTime" />
+            <input type="time" name="" id="event-time" placeholder="Add time" v-model="newEventTime" />
+
+            {{ newEventTitle }} at {{ newEventTime }} date:  {{ date }}
                         
-            <button type="submit" @click.prevent="addEvent(selectedDate.value); hideEventForm()">Add Event</button>
+            <button type="submit" @click.prevent="addEvent(date); hideEventForm()">Add Event</button>
 
         </form>
 

@@ -11,7 +11,10 @@ export const useEvents = () => {
     const newEventTitle = ref('');
     const newEventTime = ref('');
     const newEventDate = ref('');
+    const clickedDate = ref('23-23-23')
+    const selectedDate = ref('');
     const editingId = ref(null);
+    const isFormVisible = ref(false);   
 
     //Step 2: list of events stored in a li in a ref
     const events = ref([]);
@@ -26,43 +29,27 @@ export const useEvents = () => {
         }))
         })
     });
-    
-    // //Step 4: create a function to add a new event to the list
-    // const addEvent = async (selectedDate) => {
-    //     if (newEventTitle.value.trim() == '' || newEventTime.value.trim() == '') 
-    //     return; //checks if input is empty, then returns(stop function)
-    
-    //     await addDoc(eventsCollection, {
-    //     title: newEventTitle.value,
-    //     time: newEventTime.value,
-    //     date: selectedDate,
-    //     })
-    
-    //     newEventTitle.value = '';
-    //     newEventTime.value = '';
-    //     newEventDate.value = '';
-    //     console.log(`added event on ${selectedDate}`);
-    // }
 
-    const addEvent = async (selectedDate) => {
+    //Add Events
+
+    const addEvent = async () => {
         if (newEventTitle.value.trim() === '' || newEventTime.value.trim() === '') 
         return;
-
-        console.log("Selected date:", selectedDate);
     
         try {
             // Log selectedDate and other inputs for debugging
-            console.log(`Adding event with title: ${newEventTitle.value}, time: ${newEventTime.value}, date: ${selectedDate}`);
+            console.log(`Adding event with title: ${newEventTitle.value}, time: ${newEventTime.value}, date: ${selectedDate.value}`);
     
             await addDoc(eventsCollection, {
                 title: newEventTitle.value,
                 time: newEventTime.value,
-                date: selectedDate,
+                date: clickedDate.value
             });
     
             // Reset fields after successful addition
             newEventTitle.value = '';
             newEventTime.value = '';
+            selectedDate.value = '';
             newEventDate.value = '';
             console.log(`Event added successfully on ${selectedDate}`);
         } catch (error) {

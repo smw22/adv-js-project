@@ -40,7 +40,7 @@ const handleLogin = (event) => {
             <label for="event-time">Password</label>
             <input type="password" name="" id="txtPassword" v-model="password" placeholder="Password"/>
                         
-            <button type="submit">Login</button>
+            <button type="submit" @click="hideLoginForm()">Login</button>
 
         </form>
     </div>
