@@ -1,12 +1,11 @@
 <script setup lang="js">
 import { formVisibility } from '../modules/formVisibility';
 const { eventFormVisible, hideEventForm } = formVisibility(); 
-/* 
-import { getDecemberDates } from '../modules/datesOfDecember'
-const { dates } = getDecemberDates(); */
+
+import { clickedDate } from '../modules/clickedDate';
 
 import { useEvents } from '../modules/useEvents';
-const {newEventTitle, newEventTime, addEvent, clickedDate } = useEvents();
+const { newEventTitle, newEventTime, addEvent, setClickedDate } = useEvents();
 
 </script>
 
@@ -25,6 +24,9 @@ const {newEventTitle, newEventTime, addEvent, clickedDate } = useEvents();
         
             <label for="event-time">Time</label>
             <input type="time" name="" id="event-time" placeholder="Add time" v-model="newEventTime" />
+
+            <label for="event-date">Date</label>
+            <input type="text" name="" id="event-date" :value="clickedDate" />
 
             {{ newEventTitle }} at {{ newEventTime }} date:  {{ clickedDate }}  
                         

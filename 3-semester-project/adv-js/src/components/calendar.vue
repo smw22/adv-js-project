@@ -47,7 +47,7 @@ const { dates } = getDecemberDates();
                                     </div>
                                     <div id="event-container" v-else>
                                         <div>
-                                        {{ event.title }} at {{ event.time }} date: {{ event.date }}
+                                        {{ event.title }} at {{ event.time }}
                                         </div>
                                         <div class="event-buttons">
                                             <button @click="enterEditMode(event)">
@@ -145,7 +145,8 @@ button{
 }
 
 #day {
-    border: 1px solid #000;
+    border: 2px solid #000;
+    background-color: white;
     padding: 20px;
     min-height: 75px;
     height: fit-content;
@@ -153,7 +154,8 @@ button{
 }
 
 #day:hover{
-    border: 5px solid var(--blue-color); 
+    border: 2px solid var(--blue-color); 
+    scale: 1.1
 }
 
 

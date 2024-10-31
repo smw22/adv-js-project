@@ -2,22 +2,20 @@ import { ref, onMounted } from 'vue';
 import { eventsCollection, eventsFirebaseCollectionRef, db } from "./firebase";
 import { onSnapshot, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
-import { getDecemberDates } from '../modules/datesOfDecember'
-const decemberDates = getDecemberDates();
+import { clickedDate } from './clickedDate';
 
 export const useEvents = () => {
     
-    // //Step 1: new event title and time and stored in a ref
+    // variables stored in refs 
     const newEventTitle = ref('');
     const newEventTime = ref('');
     const newEventDate = ref('');
-    const clickedDate = ref('')
-    const selectedDate = ref('');
+
     const editingId = ref(null);
-    const isFormVisible = ref(false);   
 
     //Step 2: list of events stored in a li in a ref
     const events = ref([]);
+
 
     //Step 3: create a function to retrieve a new event from the list
     onMounted(() => {
@@ -25,16 +23,18 @@ export const useEvents = () => {
         events.value = snapshot.docs.map(doc => ({
             ...doc.data(), //spread operator
             id: doc.id
-            // title: doc.data().title,
-        }))
-        })
+        })).sort((a, b) => {
+                // Sort by time (assuming time is a string in 'HH:MM' 24-hour format)
+                return a.time.localeCompare(b.time);
+            });
+        });
     });
 
     //Add Events
 
-        const setClickedDate = (date) => {
-            clickedDate.value = date;
-        };
+    const setClickedDate = (date) => {
+        clickedDate.value = date;
+    };
 
     const addEvent = async (date) => {
         if (newEventTitle.value.trim() === '' || newEventTime.value.trim() === '') 
