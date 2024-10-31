@@ -1,14 +1,15 @@
 import { ref } from 'vue';
 
 // import { useEvents } from './useEvents';
-
+const clickedDate = ref('');
 
 const eventFormVisible = ref(false);
 const loginFormVisible = ref(false);
 
 export function formVisibility() {
 
-    const showEventForm = () => {
+    const showEventForm = (date) => {
+        clickedDate.value = date; 
         eventFormVisible.value = true;
     };
 

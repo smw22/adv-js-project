@@ -11,7 +11,7 @@ export const useEvents = () => {
     const newEventTitle = ref('');
     const newEventTime = ref('');
     const newEventDate = ref('');
-    const clickedDate = ref('23-23-23')
+    const clickedDate = ref('')
     const selectedDate = ref('');
     const editingId = ref(null);
     const isFormVisible = ref(false);   
@@ -32,26 +32,29 @@ export const useEvents = () => {
 
     //Add Events
 
-    const addEvent = async () => {
+        const setClickedDate = (date) => {
+            clickedDate.value = date;
+        };
+
+    const addEvent = async (date) => {
         if (newEventTitle.value.trim() === '' || newEventTime.value.trim() === '') 
         return;
     
         try {
             // Log selectedDate and other inputs for debugging
-            console.log(`Adding event with title: ${newEventTitle.value}, time: ${newEventTime.value}, date: ${selectedDate.value}`);
+            console.log(`Adding event with title: ${newEventTitle.value}, time: ${newEventTime.value}, date: ${date}`);
     
             await addDoc(eventsCollection, {
                 title: newEventTitle.value,
                 time: newEventTime.value,
-                date: clickedDate.value
+                date: date
             });
     
             // Reset fields after successful addition
             newEventTitle.value = '';
             newEventTime.value = '';
-            selectedDate.value = '';
-            newEventDate.value = '';
-            console.log(`Event added successfully on ${selectedDate}`);
+            clickedDate.value = '';
+            console.log(`Event added successfully on ${date}`);
         } catch (error) {
             console.error("Error adding event:", error);
         }
@@ -91,6 +94,8 @@ export const useEvents = () => {
         newEventTitle,
         newEventTime,
         newEventDate,
+        clickedDate,
+        setClickedDate,
         editingId,
         enterEditMode,
         addEvent,

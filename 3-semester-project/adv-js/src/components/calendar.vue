@@ -3,7 +3,7 @@ import { formVisibility } from '../modules/formVisibility';
 const { showEventForm } = formVisibility(); 
 
 import { useEvents } from '../modules/useEvents';
-const { events, newEventTitle, newEventTime, newEventDate, editingId, enterEditMode, deleteEvent, updateEvent} = useEvents();
+const { events, newEventTitle, newEventTime, newEventDate, setClickedDate, editingId, enterEditMode, deleteEvent, updateEvent} = useEvents();
 
 import { useUsers } from '../modules/useUsers'
 const { user } = useUsers();
@@ -36,11 +36,10 @@ const { dates } = getDecemberDates();
                             
                             <span v-if="user" class="add-event-button" @click="showEventForm(date)">+</span>
                             <ul v-if="user" class="event-list">
-                                <li v-for="event in events" :key="event.id" class="event-element">
+                                <li v-for="event in events.filter(event => event.date === date)" :key="event.id" class="event-element">
                                     <div v-if="editingId === event.id">
                                         <input v-model="newEventTitle" placeholder="New title"/>
                                         <input type="time" v-model="newEventTime" placeholder="New time"/>
-
 
                                         <button @click="updateEvent(event.id, newEventTitle, newEventTime)">Save</button>
                                         <button @click="editingId = null">Cancel</button>

@@ -6,7 +6,7 @@ import { getDecemberDates } from '../modules/datesOfDecember'
 const { dates } = getDecemberDates(); */
 
 import { useEvents } from '../modules/useEvents';
-const {newEventTitle, newEventTime, addEvent } = useEvents();
+const {newEventTitle, newEventTime, addEvent, clickedDate } = useEvents();
 
 </script>
 
@@ -26,9 +26,9 @@ const {newEventTitle, newEventTime, addEvent } = useEvents();
             <label for="event-time">Time</label>
             <input type="time" name="" id="event-time" placeholder="Add time" v-model="newEventTime" />
 
-            {{ newEventTitle }} at {{ newEventTime }} date:  {{ date }}
+            {{ newEventTitle }} at {{ newEventTime }} date:  {{ clickedDate }}  
                         
-            <button type="submit" @click.prevent="addEvent(date); hideEventForm()">Add Event</button>
+            <button type="submit" @click.prevent="addEvent(clickedDate); hideEventForm()">Add Event</button>
 
         </form>
 
