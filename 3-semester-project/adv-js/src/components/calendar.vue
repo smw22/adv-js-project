@@ -9,7 +9,7 @@ import { useUsers } from '../modules/useUsers'
 const { user } = useUsers();
 
 import { getDecemberDates } from '../modules/datesOfDecember'
-const { dates } = getDecemberDates();
+const { dates, offDates } = getDecemberDates();
 
 </script>
 
@@ -32,7 +32,7 @@ const { dates } = getDecemberDates();
                     <li v-for="date in dates" :key="date">
 
                         <div id="day"> 
-                            <span> {{ date }} </span> 
+                            <span> {{ new Date(date).getDate() }} </span> 
                             
                             <span v-if="user" class="add-event-button" @click="showEventForm(date)">+</span>
                             <ul v-if="user" class="event-list">
@@ -63,6 +63,16 @@ const { dates } = getDecemberDates();
                             
                         </div>
                     </li>
+
+                    <li v-for="offDate in offDates" :key="offDate">
+
+                        <div id="day" class="offDay"> 
+                            <span> {{ new Date(offDate).getDate() }} </span> 
+                            
+                        </div>
+                    </li>
+
+                    
                 </ul>
 
             </div>
@@ -149,7 +159,7 @@ button{
     background-color: white;
     padding: 20px;
     min-height: 75px;
-    height: fit-content;
+    height: 100%;
     transition: all 0.15s;
 }
 
@@ -158,27 +168,8 @@ button{
     scale: 1.1
 }
 
-
-/* .row{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px
+.offDay{
+    background-color: rgb(219, 219, 219) !important;
 }
-
-.row > div{
-    border: 1px solid #000;
-    padding: 20px;
-    min-height: 75px;
-    height: fit-content;
-    transition: all 0.15s;
-}
-
-.row > div:hover{
-    border: 5px solid var(--blue-color);
-}
-
-.off-day{
-    background-color: rgb(202, 202, 202);
-} */
 
 </style>
